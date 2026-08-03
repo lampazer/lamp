@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/auroraongithub/delta/master/assets/osudelta.png" width="180" alt="osu! logo" />
-</p>
+	<img src="/title.png" />
+	<h3 align="center">
 
 # delta (deltalazer)
 
