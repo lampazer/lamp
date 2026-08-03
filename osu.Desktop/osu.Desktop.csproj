@@ -3,11 +3,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Description>A free-to-win rhythm game. Rhythm is just a *click* away!</Description>
-    <AssemblyName>deltalazer</AssemblyName>
-    <AssemblyTitle>deltalazer</AssemblyTitle>
-    <Title>deltalazer</Title>
-    <Product>deltalazer</Product>
+    <Description>A free-to-win rhythm game. Moving is just a *keyboard_sound* away!</Description>
+    <AssemblyName>lamp</AssemblyName>
+    <AssemblyTitle>lamp</AssemblyTitle>
+    <Title>lamp</Title>
+    <Product>lamp</Product>
     <ApplicationIcon>delta.ico</ApplicationIcon>
     <Version>0.0.0</Version>
     <FileVersion>0.0.0</FileVersion>

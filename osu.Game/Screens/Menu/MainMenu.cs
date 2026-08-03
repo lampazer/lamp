@@ -50,48 +50,28 @@ namespace osu.Game.Screens.Menu
     public partial class MainMenu : OsuScreen, IHandlePresentBeatmap, IKeyBindingHandler<GlobalAction>, ISamplePlaybackDisabler
     {
         public const float FADE_IN_DURATION = 300;
-
         public const float FADE_OUT_DURATION = 400;
 
         public override bool HideOverlaysOnEnter => Buttons == null || Buttons.State == ButtonSystemState.Initial;
-
         public override bool AllowUserExit => false;
-
         public override bool AllowExternalScreenChange => true;
-
         public override bool? AllowGlobalTrackControl => true;
 
         private MenuSideFlashes sideFlashes;
-
         protected ButtonSystem Buttons;
 
-        [Resolved]
-        private GameHost host { get; set; }
+        [Resolved] private GameHost host { get; set; }
+        [Resolved] private INotificationOverlay notifications { get; set; }
+        [Resolved] private MusicController musicController { get; set; }
+        [Resolved] private IAPIProvider api { get; set; }
+        [Resolved] private Storage storage { get; set; }
+        [Resolved(canBeNull: true)] private LoginOverlay login { get; set; }
+        [Resolved(canBeNull: true)] private IDialogOverlay dialogOverlay { get; set; }
 
-        [Resolved]
-        private INotificationOverlay notifications { get; set; }
-
-        [Resolved]
-        private MusicController musicController { get; set; }
-
-        [Resolved]
-        private IAPIProvider api { get; set; }
-
-        [Resolved]
-        private Storage storage { get; set; }
-
-        [Resolved(canBeNull: true)]
-        private LoginOverlay login { get; set; }
-
-        [Resolved(canBeNull: true)]
-        private IDialogOverlay dialogOverlay { get; set; }
-
-        // used to stop kiai fountain samples when navigating to other screens
         IBindable<bool> ISamplePlaybackDisabler.SamplePlaybackDisabled => samplePlaybackDisabled;
         private readonly Bindable<bool> samplePlaybackDisabled = new Bindable<bool>();
 
         protected override BackgroundScreen CreateBackground() => new BackgroundScreenDefault();
-
         protected override bool PlayExitSound => false;
 
         private Bindable<double> holdDelay;
@@ -99,7 +79,6 @@ namespace osu.Game.Screens.Menu
         private Bindable<bool> showMobileDisclaimer;
 
         private HoldToExitGameOverlay holdToExitGameOverlay;
-
         private bool exitConfirmedViaDialog;
         private bool exitConfirmedViaHoldOrClick;
 
@@ -110,14 +89,10 @@ namespace osu.Game.Screens.Menu
         private MenuTipDisplay menuTipDisplay;
         private FillFlowContainer bottomElementsFlow;
         private SupporterDisplay supporterDisplay;
-
         private Sample reappearSampleSwoosh;
 
-        [Resolved(canBeNull: true)]
-        private SkinEditorOverlay skinEditor { get; set; }
-
-        [CanBeNull]
-        private IDisposable logoProxy;
+        [Resolved(canBeNull: true)] private SkinEditorOverlay skinEditor { get; set; }
+        [CanBeNull] private IDisposable logoProxy;
 
         [BackgroundDependencyLoader(true)]
         private void load(BeatmapListingOverlay beatmapListing, SettingsOverlay settings, OsuConfigManager config, SessionStatics statics, AudioManager audio)
@@ -149,15 +124,8 @@ namespace osu.Game.Screens.Menu
                     {
                         Buttons = new ButtonSystem
                         {
-                            OnEditBeatmap = () =>
-                            {
-                                Beatmap.SetDefault();
-                                this.Push(new EditorLoader());
-                            },
-                            OnEditSkin = () =>
-                            {
-                                skinEditor?.Show();
-                            },
+                            OnEditBeatmap = () => { Beatmap.SetDefault(); this.Push(new EditorLoader()); },
+                            OnEditSkin = () => { skinEditor?.Show(); },
                             OnSolo = loadSongSelect,
                             OnMultiplayer = () => this.Push(new Multiplayer()),
                             OnQuickPlay = loadQuickPlay,
@@ -165,10 +133,8 @@ namespace osu.Game.Screens.Menu
                             OnPlaylists = () => this.Push(new Playlists()),
                             OnDailyChallenge = room =>
                             {
-                                if (statics.Get<bool>(Static.DailyChallengeIntroPlayed))
-                                    this.Push(new DailyChallenge(room));
-                                else
-                                    this.Push(new DailyChallengeIntro(room));
+                                if (statics.Get<bool>(Static.DailyChallengeIntroPlayed)) this.Push(new DailyChallenge(room));
+                                else this.Push(new DailyChallengeIntro(room));
                             },
                             OnExit = e =>
                             {
@@ -180,41 +146,18 @@ namespace osu.Game.Screens.Menu
                 },
                 logoTarget = new Container { RelativeSizeAxes = Axes.Both, },
                 sideFlashes = SeasonalUIConfig.ENABLED ? new SeasonalMenuSideFlashes() : new MenuSideFlashes(),
-                songTicker = new SongTicker
-                {
-                    Anchor = Anchor.TopRight,
-                    Origin = Anchor.TopRight,
-                    Margin = new MarginPadding { Right = 15, Top = 5 }
-                },
-                // For now, this is too much alongside the seasonal lighting.
+                songTicker = new SongTicker { Anchor = Anchor.TopRight, Origin = Anchor.TopRight, Margin = new MarginPadding { Right = 15, Top = 5 } },
                 SeasonalUIConfig.ENABLED ? Empty() : new KiaiMenuFountains(),
                 bottomElementsFlow = new FillFlowContainer
                 {
-                    AutoSizeAxes = Axes.Both,
-                    Direction = FillDirection.Vertical,
-                    Anchor = Anchor.BottomCentre,
-                    Origin = Anchor.BottomCentre,
-                    Spacing = new Vector2(5),
+                    AutoSizeAxes = Axes.Both, Direction = FillDirection.Vertical, Anchor = Anchor.BottomCentre, Origin = Anchor.BottomCentre, Spacing = new Vector2(5),
                     Children = new Drawable[]
                     {
-                        menuTipDisplay = new MenuTipDisplay
-                        {
-                            Anchor = Anchor.TopCentre,
-                            Origin = Anchor.TopCentre,
-                        },
-                        onlineMenuBanner = new OnlineMenuBanner
-                        {
-                            Anchor = Anchor.TopCentre,
-                            Origin = Anchor.TopCentre,
-                        }
+                        menuTipDisplay = new MenuTipDisplay { Anchor = Anchor.TopCentre, Origin = Anchor.TopCentre, },
+                        onlineMenuBanner = new OnlineMenuBanner { Anchor = Anchor.TopCentre, Origin = Anchor.TopCentre, }
                     }
                 },
-                supporterDisplay = new SupporterDisplay
-                {
-                    Margin = new MarginPadding(5),
-                    Anchor = Anchor.TopLeft,
-                    Origin = Anchor.TopLeft,
-                },
+                supporterDisplay = new SupporterDisplay { Margin = new MarginPadding(5), Anchor = Anchor.TopLeft, Origin = Anchor.TopLeft, },
                 holdToExitGameOverlay?.CreateProxy() ?? Empty()
             });
 
@@ -229,7 +172,6 @@ namespace osu.Game.Screens.Menu
                         ApplyToBackground(b => b.FadeColour(OsuColour.Gray(baseDim), 500, Easing.OutSine));
                         onlineMenuBanner.State.Value = Visibility.Hidden;
                         break;
-
                     default:
                         ApplyToBackground(b => b.FadeColour(OsuColour.Gray(baseDim * 0.8f), 500, Easing.OutSine));
                         onlineMenuBanner.State.Value = Visibility.Visible;
@@ -239,7 +181,6 @@ namespace osu.Game.Screens.Menu
 
             Buttons.OnSettings = () => settings?.ToggleVisibility();
             Buttons.OnBeatmapListing = () => beatmapListing?.ToggleVisibility();
-
             reappearSampleSwoosh = audio.Samples.Get(@"Menu/reappear-swoosh");
         }
 
@@ -259,8 +200,6 @@ namespace osu.Game.Screens.Menu
             if (e.Last is IntroScreen && musicController.TrackLoaded)
             {
                 var track = musicController.CurrentTrack;
-
-                // presume the track is the current beatmap's track. not sure how correct this assumption is but it has worked until now.
                 if (!track.IsRunning)
                 {
                     Beatmap.Value.PrepareTrackForPreview(false);
@@ -272,37 +211,26 @@ namespace osu.Game.Screens.Menu
                 dialogOverlay?.Push(new StorageErrorDialog(osuStorage, osuStorage.Error));
         }
 
-        [CanBeNull]
-        private ScheduledDelegate mobileDisclaimerSchedule;
+        [CanBeNull] private ScheduledDelegate mobileDisclaimerSchedule;
 
         protected override void LogoArriving(OsuLogo logo, bool resuming)
         {
             base.LogoArriving(logo, resuming);
-
             Buttons.SetOsuLogo(logo);
-
             logo.FadeColour(Color4.White, 100, Easing.OutQuint);
             logo.FadeIn(100, Easing.OutQuint);
-
             logoProxy = logo.ProxyToContainer(logoTarget);
 
             if (resuming)
             {
                 Buttons.State = ButtonSystemState.TopLevel;
-
                 this.FadeIn(FADE_IN_DURATION, Easing.OutQuint);
                 buttonsContainer.MoveTo(new Vector2(0, 0), FADE_IN_DURATION, Easing.OutQuint);
-
                 sideFlashes.Delay(FADE_IN_DURATION).FadeIn(64, Easing.InQuint);
             }
             else
             {
-                // copy out old action to avoid accidentally capturing logo.Action in closure, causing a self-reference loop.
                 var previousAction = logo.Action;
-
-                // we want to hook into logo.Action to display certain overlays, but also preserve the return value of the old action.
-                // therefore pass the old action to displayLogin, so that it can return that value.
-                // this ensures that the OsuLogo sample does not play when it is not desired.
                 logo.Action = () => onLogoClick(previousAction);
             }
         }
@@ -330,7 +258,6 @@ namespace osu.Game.Screens.Menu
         private void displayLoginIfApplicable()
         {
             if (loginDisplayed.Value) return;
-
             if (!api.IsLoggedIn || api.State.Value == APIState.RequiresSecondFactorAuth)
             {
                 Scheduler.AddDelayed(() => login?.Show(), 500);
@@ -340,12 +267,9 @@ namespace osu.Game.Screens.Menu
 
         protected override void LogoSuspending(OsuLogo logo)
         {
-            var seq = logo.FadeOut(300, Easing.InSine)
-                          .ScaleTo(0.2f, 300, Easing.InSine);
-
+            var seq = logo.FadeOut(300, Easing.InSine).ScaleTo(0.2f, 300, Easing.InSine);
             logoProxy?.Dispose();
             logoProxy = null;
-
             seq.OnComplete(_ => Buttons.SetOsuLogo(null));
             seq.OnAbort(_ => Buttons.SetOsuLogo(null));
         }
@@ -353,7 +277,6 @@ namespace osu.Game.Screens.Menu
         protected override void LogoExiting(OsuLogo logo)
         {
             base.LogoExiting(logo);
-
             logoProxy?.Dispose();
             logoProxy = null;
         }
@@ -361,132 +284,77 @@ namespace osu.Game.Screens.Menu
         public override void OnSuspending(ScreenTransitionEvent e)
         {
             base.OnSuspending(e);
-
             Buttons.State = ButtonSystemState.EnteringMode;
-
             this.FadeOut(FADE_OUT_DURATION, Easing.InSine);
             buttonsContainer.MoveTo(new Vector2(-800, 0), FADE_OUT_DURATION, Easing.InSine);
-
             sideFlashes.FadeOut(64, Easing.OutQuint);
-
-            bottomElementsFlow
-                .ScaleTo(0.9f, 1000, Easing.OutQuint)
-                .FadeOut(500, Easing.OutQuint);
-
-            supporterDisplay
-                .FadeOut(500, Easing.OutQuint);
-
+            bottomElementsFlow.ScaleTo(0.9f, 1000, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
+            supporterDisplay.FadeOut(500, Easing.OutQuint);
             samplePlaybackDisabled.Value = true;
         }
 
         public override void OnResuming(ScreenTransitionEvent e)
         {
             base.OnResuming(e);
-
-            // Ensures any playing `ButtonSystem` samples are stopped when returning to MainMenu (as to not overlap with the 'back' sample)
             Buttons.StopSamplePlayback();
             reappearSampleSwoosh?.Play();
-
             ApplyToBackground(b => (b as BackgroundScreenDefault)?.Next());
-
             musicController.EnsurePlayingSomething();
-
-            // Cycle tip on resuming
             menuTipDisplay.ShowNextTip();
-
-            bottomElementsFlow
-                .ScaleTo(1, 1000, Easing.OutQuint)
-                .FadeIn(1000, Easing.OutQuint);
-
+            bottomElementsFlow.ScaleTo(1, 1000, Easing.OutQuint).FadeIn(1000, Easing.OutQuint);
             samplePlaybackDisabled.Value = false;
         }
 
         public override bool OnExiting(ScreenExitEvent e)
         {
-            bool requiresConfirmation =
-                // we need to have a dialog overlay to confirm in the first place.
-                dialogOverlay != null
-                // if the dialog has already displayed and been accepted by the user, we are good.
-                && !exitConfirmedViaDialog
-                // Only require confirmation if there is either an ongoing operation or the user exited via a non-hold escape press.
-                && (notifications.HasOngoingOperations || !exitConfirmedViaHoldOrClick);
+            bool requiresConfirmation = dialogOverlay != null && !exitConfirmedViaDialog && (notifications.HasOngoingOperations || !exitConfirmedViaHoldOrClick);
 
             if (requiresConfirmation)
             {
                 if (dialogOverlay.CurrentDialog is ConfirmExitDialog exitDialog)
                 {
-                    if (exitDialog.Buttons.OfType<PopupDialogOkButton>().FirstOrDefault() != null)
-                        exitDialog.PerformOkAction();
-                    else
-                        exitDialog.Flash();
+                    if (exitDialog.Buttons.OfType<PopupDialogOkButton>().FirstOrDefault() != null) exitDialog.PerformOkAction();
+                    else exitDialog.Flash();
                 }
                 else
                 {
-                    dialogOverlay.Push(new ConfirmExitDialog(() =>
-                    {
-                        exitConfirmedViaDialog = true;
-                        this.Exit();
-                    }, () =>
-                    {
-                        holdToExitGameOverlay.Abort();
-                        Game.CancelRestartOnExit();
-                    }));
+                    dialogOverlay.Push(new ConfirmExitDialog(() => { exitConfirmedViaDialog = true; this.Exit(); }, () => { holdToExitGameOverlay.Abort(); Game.CancelRestartOnExit(); }));
                 }
-
                 return true;
             }
 
             Buttons.State = ButtonSystemState.Exit;
             OverlayActivationMode.Value = OverlayActivation.Disabled;
-
             songTicker.Hide();
-
             this.FadeOut(3000);
-
-            bottomElementsFlow
-                .FadeOut(500, Easing.OutQuint);
-
-            supporterDisplay
-                .FadeOut(500, Easing.OutQuint);
-
+            bottomElementsFlow.FadeOut(500, Easing.OutQuint);
+            supporterDisplay.FadeOut(500, Easing.OutQuint);
             return base.OnExiting(e);
         }
 
         public void PresentBeatmap(WorkingBeatmap beatmap, RulesetInfo ruleset)
         {
             Logger.Log($"{nameof(MainMenu)} completing {nameof(PresentBeatmap)} with beatmap {beatmap} ruleset {ruleset}");
-
             Beatmap.Value = beatmap;
             Ruleset.Value = ruleset;
-
             Schedule(loadSongSelect);
         }
 
         public bool OnPressed(KeyBindingPressEvent<GlobalAction> e)
         {
-            if (e.Repeat)
-                return false;
-
+            if (e.Repeat) return false;
             switch (e.Action)
             {
                 case GlobalAction.Back:
-                    // In the case of a host being able to exit, the back action is handled by ExitConfirmOverlay.
                     Debug.Assert(!host.CanExit);
-
                     return host.SuspendToBackground();
             }
-
             return false;
         }
 
-        public void OnReleased(KeyBindingReleaseEvent<GlobalAction> e)
-        {
-        }
-
+        public void OnReleased(KeyBindingReleaseEvent<GlobalAction> e) { }
         private void loadSongSelect() => this.Push(new SoloSongSelect());
-
         private void loadQuickPlay() => this.Push(new OnlinePlay.Matchmaking.Intro.ScreenIntro(MatchmakingPoolType.QuickPlay));
-
         private void loadRankedPlay() => this.Push(new OnlinePlay.Matchmaking.Intro.ScreenIntro(MatchmakingPoolType.RankedPlay));
 
         private partial class MobileDisclaimerDialog : PopupDialog
@@ -495,16 +363,10 @@ namespace osu.Game.Screens.Menu
             {
                 HeaderText = ButtonSystemStrings.MobileDisclaimerHeader;
                 BodyText = ButtonSystemStrings.MobileDisclaimerBody;
-
                 Icon = FontAwesome.Solid.SmileBeam;
-
                 Buttons = new PopupDialogButton[]
                 {
-                    new PopupDialogOkButton
-                    {
-                        Text = ButtonSystemStrings.MobileDisclaimerOkButton,
-                        Action = confirmed,
-                    },
+                    new PopupDialogOkButton { Text = ButtonSystemStrings.MobileDisclaimerOkButton, Action = confirmed, },
                 };
             }
         }

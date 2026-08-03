@@ -77,9 +77,9 @@ namespace osu.Game
     public partial class OsuGameBase : Framework.Game, ICanAcceptFiles, IBeatSyncProvider
     {
 #if DEBUG
-        public const string GAME_NAME = "deltalazer (development)";
+        public const string GAME_NAME = "lamp (lampazer development build)";
 #else
-        public const string GAME_NAME = "deltalazer";
+        public const string GAME_NAME = "lamp";
 #endif
 
         public const string OSU_PROTOCOL = "osu://";
