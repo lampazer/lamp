@@ -4,7 +4,7 @@
 
 # delta (deltalazer)
 
-solo fork of **deltalazer/delta** with section and hitobject gimmick systems for mapping and gameplay experiments
+solo fork of **deltalazer/delta**.
 
 # which means you can do a lot of things!!!
 
