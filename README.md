@@ -1,26 +1,16 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/auroraongithub/delta/master/assets/osudelta.png" width="180" alt="osu! logo" />
-</p>
+	<img src="/title.png" />
+	<h3 align="center">
 
 # delta (deltalazer)
 
-community-driven fork of **osu!lazer** with section and hitobject gimmick systems for mapping and gameplay experiments
-
-join our community discord!! (have fun and share stuff)
-https://discord.gg/dfPwhRtGVZ
-
-## what this fork adds (in simplest terms)
-
-- section gimmicks and per-hitobject attributes with editor UI
-- control hp/judgment limits
-- force mods and allow customization
+solo fork of **deltalazer/delta**.
 
 # which means you can do a lot of things!!!
 
 ## project base
 
-- upstream project: https://github.com/ppy/osu
-- this repository tracks and extends upstream osu!lazer behavior
+- upstream project: https://github.com/deltalazer/delta
 
 ## important server note
 
