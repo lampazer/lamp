@@ -52,7 +52,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "osu! music theme"
         /// </summary>
-        public static LocalisableString OsuMusicTheme => new TranslatableString(getKey(@"osu_music_theme"), @"osu! music theme");
+        public static LocalisableString OsuMusicTheme => new TranslatableString(getKey(@"osu_music_theme"), @"!lamp music theme");
 
         /// <summary>
         /// "Intro sequence"
@@ -77,7 +77,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Changes to this setting will only apply with an active osu!supporter tag."
         /// </summary>
-        public static LocalisableString NotSupporterNote => new TranslatableString(getKey(@"not_supporter_note"), @"Changes to this setting will only apply with an active osu!supporter tag.");
+        public static LocalisableString NotSupporterNote => new TranslatableString(getKey(@"not_supporter_note"), @"Changes to this setting will only apply with an active !lampsupporter tag.");
 
         /// <summary>
         /// "Song Select"

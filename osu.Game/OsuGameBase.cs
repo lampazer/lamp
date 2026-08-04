@@ -77,7 +77,7 @@ namespace osu.Game
     public partial class OsuGameBase : Framework.Game, ICanAcceptFiles, IBeatSyncProvider
     {
 #if DEBUG
-        public const string GAME_NAME = "lamp (lampazer development build)";
+        public const string GAME_NAME = "lamp/azer";
 #else
         public const string GAME_NAME = "lamp";
 #endif
@@ -506,7 +506,7 @@ namespace osu.Game
         {
             base.LoadComplete();
 
-            var localeMappings = Enum.GetValues<Language>().Select(language =>
+            var localeMappings = LanguageExtensions.GetSupportedLanguages().Select(language =>
             {
 #if DEBUG
                 if (language == Language.debug)

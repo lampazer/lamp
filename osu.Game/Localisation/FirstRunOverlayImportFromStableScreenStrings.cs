@@ -17,17 +17,17 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "If you have an installation of a previous osu! version, you can choose to migrate your existing content. Note that this will not affect your existing installation&#39;s files in any way."
         /// </summary>
-        public static LocalisableString Description => new TranslatableString(getKey(@"description"), @"If you have an installation of a previous osu! version, you can choose to migrate your existing content. Note that this will not affect your existing installation's files in any way.");
+        public static LocalisableString Description => new TranslatableString(getKey(@"description"), @"If you have an installation of a previous !lamp version, you can choose to migrate your existing content. Note that this will not affect your existing installation's files in any way.");
 
         /// <summary>
         /// "previous osu! install"
         /// </summary>
-        public static LocalisableString LocateDirectoryLabel => new TranslatableString(getKey(@"locate_directory_label"), @"previous osu! install");
+        public static LocalisableString LocateDirectoryLabel => new TranslatableString(getKey(@"locate_directory_label"), @"previous !lamp install");
 
         /// <summary>
         /// "Click to locate a previous osu! install"
         /// </summary>
-        public static LocalisableString LocateDirectoryPlaceholder => new TranslatableString(getKey(@"locate_directory_placeholder"), @"Click to locate a previous osu! install");
+        public static LocalisableString LocateDirectoryPlaceholder => new TranslatableString(getKey(@"locate_directory_placeholder"), @"Click to locate a previous !lamp install");
 
         /// <summary>
         /// "Import content from previous version"
@@ -67,12 +67,12 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "A second copy of all files will be made during import. To avoid this, please make sure the lazer data folder is on the same drive as your previous osu! install (and the file system is NTFS)."
         /// </summary>
-        public static LocalisableString SecondCopyWillBeMadeWindows => new TranslatableString(getKey(@"second_copy_will_be_made_windows"), @"A second copy of all files will be made during import. To avoid this, please make sure the lazer data folder is on the same drive as your previous osu! install (and the file system is NTFS).");
+        public static LocalisableString SecondCopyWillBeMadeWindows => new TranslatableString(getKey(@"second_copy_will_be_made_windows"), @"A second copy of all files will be made during import. To avoid this, please make sure the lazer data folder is on the same drive as your previous !lamp install (and the file system is NTFS).\");
 
         /// <summary>
         /// "A second copy of all files will be made during import. To avoid this, please make sure the lazer data folder is on the same drive as your previous osu! install (and the file system supports hard links)."
         /// </summary>
-        public static LocalisableString SecondCopyWillBeMadeOtherPlatforms => new TranslatableString(getKey(@"second_copy_will_be_made_other_platforms"), @"A second copy of all files will be made during import. To avoid this, please make sure the lazer data folder is on the same drive as your previous osu! install (and the file system supports hard links).");
+        public static LocalisableString SecondCopyWillBeMadeOtherPlatforms => new TranslatableString(getKey(@"second_copy_will_be_made_other_platforms"), @"A second copy of all files will be made during import. To avoid this, please make sure the lazer data folder is on the same drive as your previous !lamp install (and the file system supports hard links).\");
 
         private static string getKey(string key) => $@"{prefix}:{key}";
     }

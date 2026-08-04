@@ -158,19 +158,19 @@ namespace osu.Game.Screens.Menu
                                                                     RelativeSizeAxes = Axes.Both,
                                                                     Anchor = Anchor.Centre,
                                                                     Origin = Anchor.Centre,
-                                                                    Alpha = 0, // <--- HACK: Oculta el fondo original de Delta
+                                                                    Alpha = 0,
                                                                     Children = new Drawable[]
                                                                     {
                                                                          new Box
                                                                          {
                                                                              RelativeSizeAxes = Axes.Both,
-                                                                             Colour = ColourInfo.GradientVertical(Color4Extensions.FromHex(@"c53a42"), Color4Extensions.FromHex(@"a5252c")),
+                                                                             Colour = ColourInfo.GradientVertical(Color4.Transparent, Color4.Transparent),
                                                                          },
                                                                          triangles = new TrianglesV2
                                                                          {
                                                                              Anchor = Anchor.Centre, Origin = Anchor.Centre,
                                                                              Thickness = 0.009f, ScaleAdjust = 3, SpawnRatio = 1.4f,
-                                                                             Colour = ColourInfo.GradientVertical(Color4Extensions.FromHex(@"bf333b"), Color4Extensions.FromHex(@"961e25")),
+                                                                             Colour = ColourInfo.GradientVertical(Color4.Transparent, Color4.Transparent),
                                                                              RelativeSizeAxes = Axes.Both,
                                                                          }
                                                                     }

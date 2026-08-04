@@ -27,7 +27,7 @@ namespace osu.Game.Screens.Menu
     public partial class IntroCircles : IntroScreen
     {
         protected override string BeatmapHash => "3c8b1fcc9434dbb29e2fb613d3b9eada9d7bb6c125ceb32396c3b53437280c83";
-        protected override string BeatmapFile => "circles.osz";
+        protected override string BeatmapFile => "bee.osz";
 
         public const double TRACK_START_DELAY = 600;
         private const double delay_for_menu = 7000; // 7 Segundos exactos de intro caótica

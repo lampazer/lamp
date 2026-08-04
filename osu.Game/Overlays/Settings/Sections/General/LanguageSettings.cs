@@ -6,6 +6,7 @@ using osu.Framework.Configuration;
 using osu.Framework.Graphics;
 using osu.Framework.Localisation;
 using osu.Game.Configuration;
+using osu.Game.Extensions;
 using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Localisation;
 
@@ -22,6 +23,7 @@ namespace osu.Game.Overlays.Settings.Sections.General
             {
                 new SettingsItemV2(new FormEnumDropdown<Language>
                 {
+                    Items = LanguageExtensions.GetSupportedLanguages(),
                     Caption = GeneralSettingsStrings.LanguageDropdown,
                     Current = game.CurrentLanguage,
                     AlwaysShowSearchBar = true,

@@ -72,7 +72,8 @@ namespace osu.Game.Localisation
 
                 try
                 {
-                    return manager.GetString(key, EffectiveCulture);
+                    var result = manager.GetString(key, EffectiveCulture);
+                    return SanitizeBranding(result);
                 }
                 catch (MissingManifestResourceException)
                 {
@@ -81,6 +82,18 @@ namespace osu.Game.Localisation
                     return null;
                 }
             }
+        }
+
+        private static string? SanitizeBranding(string? text)
+        {
+            if (text == null)
+                return null;
+
+            return text
+                .Replace("osu!stable", "!lampstable")
+                .Replace("osu!supporter", "!lampsupporter")
+                .Replace("osu!direct", "!lampdirect")
+                .Replace("osu!", "!lamp");
         }
 
         public Task<string> GetAsync(string lookup, CancellationToken cancellationToken = default)

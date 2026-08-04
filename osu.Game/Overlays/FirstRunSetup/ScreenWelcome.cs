@@ -16,6 +16,7 @@ using osu.Framework.Threading;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Extensions;
 using osu.Game.Localisation;
 using osu.Game.Overlays.Settings;
 using osuTK;
@@ -79,7 +80,7 @@ namespace osu.Game.Overlays.FirstRunSetup
                 Direction = FillDirection.Full;
                 Spacing = new Vector2(5);
 
-                ChildrenEnumerable = Enum.GetValues<Language>()
+                ChildrenEnumerable = LanguageExtensions.GetSupportedLanguages()
                                          .Select(l => new LanguageButton(l)
                                          {
                                              Action = () => language.Value = l,

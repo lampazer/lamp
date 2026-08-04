@@ -49,7 +49,7 @@ namespace osu.Game.Localisation
         ///
         /// Please try changing your audio device to a working setting."
         /// </summary>
-        public static LocalisableString AudioPlaybackIssue => new TranslatableString(getKey(@"audio_playback_issue"), @"osu! doesn't seem to be able to play audio correctly.
+        public static LocalisableString AudioPlaybackIssue => new TranslatableString(getKey(@"audio_playback_issue"), @"!lamp doesn't seem to be able to play audio correctly.
 
 Please try changing your audio device to a working setting.");
 
@@ -107,7 +107,7 @@ Please try changing your audio device to a working setting.");
         /// "You are now running osu! {0}.
         /// Click to see what&#39;s new!"
         /// </summary>
-        public static LocalisableString GameVersionAfterUpdate(string version) => new TranslatableString(getKey(@"game_version_after_update"), @"You are now running osu! {0}.
+        public static LocalisableString GameVersionAfterUpdate(string version) => new TranslatableString(getKey(@"game_version_after_update"), @"You are now running !lamp {0}.
 Click to see what's new!", version);
 
         /// <summary>
@@ -148,7 +148,7 @@ Click to see what's new!", version);
         /// <summary>
         /// "Connection to online services was interrupted. osu! will be operating with limited functionality."
         /// </summary>
-        public static LocalisableString APIConnectionInterrupted => new TranslatableString(getKey(@"api_connection_interrupted"), @"Connection to online services was interrupted. osu! will be operating with limited functionality.");
+        public static LocalisableString APIConnectionInterrupted => new TranslatableString(getKey(@"api_connection_interrupted"), @"Connection to online services was interrupted. !lamp will be operating with limited functionality.");
 
         /// <summary>
         /// "You have been logged out on this device due to a login to your account on another device."
@@ -193,7 +193,7 @@ Click to see what's new!", version);
         /// <summary>
         /// "A newer release of osu! has been found ({0} → {1})."
         /// </summary>
-        public static LocalisableString UpdateAvailable(string oldVersion, string newVersion) => new TranslatableString(getKey(@"update_available"), @"A newer release of osu! has been found ({0} → {1}).", oldVersion, newVersion);
+        public static LocalisableString UpdateAvailable(string oldVersion, string newVersion) => new TranslatableString(getKey(@"update_available"), @"A newer release of !lamp has been found ({0} → {1}).", oldVersion, newVersion);
 
         /// <summary>
         /// "Click here to download the new version, which can be installed over the top of your existing installation."
@@ -203,7 +203,7 @@ Click to see what's new!", version);
         /// <summary>
         /// "Check with your package manager / provider to bring osu! up-to-date!"
         /// </summary>
-        public static LocalisableString UpdateAvailablePackageManaged => new TranslatableString(getKey(@"update_available_package_managed"), @"Check with your package manager / provider to bring osu! up-to-date!");
+        public static LocalisableString UpdateAvailablePackageManaged => new TranslatableString(getKey(@"update_available_package_managed"), @"Check with your package manager / provider to bring !lamp up-to-date!");
 
         /// <summary>
         /// "An action was interrupted due to a dialog being displayed."
@@ -233,12 +233,12 @@ Click to see what's new!", version);
         /// <summary>
         /// "Running osu! as {0} does not improve performance, may break integrations and poses a security risk. Please run the game as a normal user."
         /// </summary>
-        public static LocalisableString ElevatedPrivileges(LocalisableString user) => new TranslatableString(getKey(@"elevated_privileges"), @"Running osu! as {0} does not improve performance, may break integrations and poses a security risk. Please run the game as a normal user.", user);
+        public static LocalisableString ElevatedPrivileges(LocalisableString user) => new TranslatableString(getKey(@"elevated_privileges"), @"Running !lamp as {0} does not improve performance, may break integrations and poses a security risk. Please run the game as a normal user.", user);
 
         /// <summary>
         /// "On macOS, installing osu! to a directory other than /Applications or {0}/Applications can cause issues with updating the game. Please move your game installation to one of these locations."
         /// </summary>
-        public static LocalisableString MacOSAppLocation(LocalisableString userProfile) => new TranslatableString(getKey(@"macos_app_location"), @"On macOS, installing osu! to a directory other than /Applications or {0}/Applications can cause issues with updating the game. Please move your game installation to one of these locations.", userProfile);
+        public static LocalisableString MacOSAppLocation(LocalisableString userProfile) => new TranslatableString(getKey(@"macos_app_location"), @"On macOS, installing !lamp to a directory other than /Applications or {0}/Applications can cause issues with updating the game. Please move your game installation to one of these locations.", userProfile);
 
         /// <summary>
         /// "Screenshot saved! Click to view.

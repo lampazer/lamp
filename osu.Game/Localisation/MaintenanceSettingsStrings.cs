@@ -42,12 +42,12 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "The target directory already seems to have an osu! install. Use that data instead?"
         /// </summary>
-        public static LocalisableString TargetDirectoryAlreadyInstalledOsu => new TranslatableString(getKey(@"target_directory_already_installed_osu"), @"The target directory already seems to have an osu! install. Use that data instead?");
+        public static LocalisableString TargetDirectoryAlreadyInstalledOsu => new TranslatableString(getKey(@"target_directory_already_installed_osu"), @"The target directory already seems to have an !lamp install. Use that data instead?");
 
         /// <summary>
         /// "To complete this operation, osu! will close. Please open it again to use the new data location."
         /// </summary>
-        public static LocalisableString RestartAndReOpenRequiredForCompletion => new TranslatableString(getKey(@"restart_and_re_open_required_for_completion"), @"To complete this operation, osu! will close. Please open it again to use the new data location.");
+        public static LocalisableString RestartAndReOpenRequiredForCompletion => new TranslatableString(getKey(@"restart_and_re_open_required_for_completion"), @"To complete this operation, !lamp will close. Please open it again to use the new data location.");
 
         /// <summary>
         /// "Delete ALL beatmaps"
@@ -132,7 +132,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Please select your osu!stable install location"
         /// </summary>
-        public static LocalisableString StableDirectorySelectHeader => new TranslatableString(getKey(@"stable_directory_select_header"), @"Please select your osu!stable install location");
+        public static LocalisableString StableDirectorySelectHeader => new TranslatableString(getKey(@"stable_directory_select_header"), @"Please select your !lampstable install location");
 
         private static string getKey(string key) => $"{prefix}:{key}";
     }

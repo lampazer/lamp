@@ -24,7 +24,7 @@ namespace osu.Game.Screens.Menu
     public partial class IntroTriangles : IntroScreen
     {
         protected override string BeatmapHash => "a1556d0801b3a6b175dda32ef546f0ec812b400499f575c44fccbe9c67f9b1e5";
-        protected override string BeatmapFile => "triangles.osz";
+        protected override string BeatmapFile => "bee.osz";
 
         [Resolved]
         private AudioManager audio { get; set; }

@@ -42,7 +42,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "What used to be &quot;osu!direct&quot; is available to all users just like on the website. You can access it anywhere using {0}!"
         /// </summary>
-        public static LocalisableString FreeOsuDirect(LocalisableString keybind) => new TranslatableString(getKey(@"free_osu_direct"), @"What used to be ""osu!direct"" is available to all users just like on the website. You can access it anywhere using {0}!", keybind);
+        public static LocalisableString FreeOsuDirect(LocalisableString keybind) => new TranslatableString(getKey(@"free_osu_direct"), @"What used to be ""!lampdirect"" is available to all users just like on the website. You can access it anywhere using {0}!", keybind);
 
         /// <summary>
         /// "Seeking in replays is available by dragging on the progress bar at the bottom of the screen or by using the left and right arrow keys!"

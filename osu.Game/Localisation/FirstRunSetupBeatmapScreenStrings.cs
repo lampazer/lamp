@@ -17,7 +17,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "&quot;Beatmaps&quot; are what we call sets of playable levels. osu! doesn&#39;t come with any beatmaps pre-loaded. This step will help you get started on your beatmap collection."
         /// </summary>
-        public static LocalisableString Description => new TranslatableString(getKey(@"description"), @"""Beatmaps"" are what we call sets of playable levels. osu! doesn't come with any beatmaps pre-loaded. This step will help you get started on your beatmap collection.");
+        public static LocalisableString Description => new TranslatableString(getKey(@"description"), @"""Beatmaps"" are what we call sets of playable levels. !lamp doesn't come with any beatmaps pre-loaded. This step will help you get started on your beatmap collection.");
 
         /// <summary>
         /// "If you are a new player, we recommend playing through the tutorial to get accustomed to the gameplay."
@@ -27,7 +27,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Get the osu! tutorial"
         /// </summary>
-        public static LocalisableString TutorialButton => new TranslatableString(getKey(@"tutorial_button"), @"Get the osu! tutorial");
+        public static LocalisableString TutorialButton => new TranslatableString(getKey(@"tutorial_button"), @"Get the !lamp tutorial");
 
         /// <summary>
         /// "To get you started, we have some recommended beatmaps."

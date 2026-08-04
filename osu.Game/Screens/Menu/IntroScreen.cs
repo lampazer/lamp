@@ -5,6 +5,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using osu.Framework.Allocation;
@@ -151,11 +152,25 @@ namespace osu.Game.Screens.Menu
                 {
                     // if we detect that the theme track or beatmap is unavailable this is either first startup or things are in a bad state.
                     // this could happen if a user has nuked their files store. for now, reimport to repair this.
-                    var import = beatmaps.Import(new ImportTask(game.Resources.GetStream($"Tracks/{BeatmapFile}"), BeatmapFile)).GetResultSafely();
+                    var importTask = getIntroBeatmapImportTask(game, BeatmapFile, out bool importedFromLocal);
+                    var import = beatmaps.Import(importTask).GetResultSafely();
 
                     import?.PerformWrite(b => b.Protected = true);
 
-                    loadThemedIntro();
+                    if (import != null && importedFromLocal)
+                    {
+                        import.PerformRead(s =>
+                        {
+                            if (s.Beatmaps.Count > 0)
+                                initialBeatmap = beatmaps.GetWorkingBeatmap(s.Beatmaps.First());
+                        });
+
+                        UsingThemedIntro = initialBeatmap != null;
+                    }
+                    else
+                    {
+                        loadThemedIntro();
+                    }
                 }
             }
 
@@ -185,6 +200,43 @@ namespace osu.Game.Screens.Menu
             }
 
             AddInternal(new GlobalScrollAdjustsVolume());
+        }
+
+        private static ImportTask getIntroBeatmapImportTask(Framework.Game game, string beatmapFile, out bool isLocal)
+        {
+            string? localPath = findPathInCurrentOrParents(beatmapFile);
+
+            if (localPath != null)
+            {
+                isLocal = true;
+                return new ImportTask(File.OpenRead(localPath), Path.GetFileName(localPath));
+            }
+
+            isLocal = false;
+            return new ImportTask(game.Resources.GetStream($"Tracks/{beatmapFile}"), beatmapFile);
+        }
+
+        private static string? findPathInCurrentOrParents(string filename)
+        {
+            string current = Environment.CurrentDirectory;
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (string.IsNullOrEmpty(current))
+                    break;
+
+                string candidate = Path.Combine(current, filename);
+                if (File.Exists(candidate))
+                    return candidate;
+
+                var parent = Directory.GetParent(current);
+                if (parent == null || parent.FullName == current)
+                    break;
+
+                current = parent.FullName;
+            }
+
+            return null;
         }
 
         public override void OnEntering(ScreenTransitionEvent e)

@@ -17,7 +17,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "track recent dev updates in the osu! ecosystem"
         /// </summary>
-        public static LocalisableString ChangelogDescription => new TranslatableString(getKey(@"changelog_description"), @"track recent dev updates in the osu! ecosystem");
+        public static LocalisableString ChangelogDescription => new TranslatableString(getKey(@"changelog_description"), @"track recent dev updates in the !lamp ecosystem");
 
         /// <summary>
         /// "view your friends and spectate other players"

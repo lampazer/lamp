@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using osu.Framework.Configuration;
 using osu.Framework.Localisation;
@@ -14,6 +15,13 @@ namespace osu.Game.Extensions
     /// </summary>
     public static class LanguageExtensions
     {
+        private static readonly Language[] supportedLanguages =
+        {
+            Language.en,
+            Language.es,
+            Language.fr,
+        };
+
         /// <summary>
         /// Returns the culture code of the <see cref="CultureInfo"/> that corresponds to the supplied <paramref name="language"/>.
         /// </summary>
@@ -27,6 +35,11 @@ namespace osu.Game.Extensions
 
             return language.ToString().Replace("_", "-");
         }
+
+        public static IReadOnlyList<Language> GetSupportedLanguages() => supportedLanguages;
+
+        public static bool IsSupportedLanguage(this Language language) =>
+            language == Language.en || language == Language.es || language == Language.fr;
 
         /// <summary>
         /// Attempts to parse the supplied <paramref name="cultureCode"/> to a <see cref="Language"/> value.
@@ -55,13 +68,13 @@ namespace osu.Game.Extensions
         public static Language GetLanguageFor(string frameworkLocale, LocalisationParameters localisationParameters)
         {
             // the usual case when the user has changed the language
-            if (TryParseCultureCode(frameworkLocale, out var language))
+            if (TryParseCultureCode(frameworkLocale, out var language) && language.IsSupportedLanguage())
                 return language;
 
             if (localisationParameters.Store != null)
             {
                 // startup case, locale not explicitly set, or the set language was removed in an update
-                if (TryParseCultureCode(localisationParameters.Store.EffectiveCulture.Name, out language))
+                if (TryParseCultureCode(localisationParameters.Store.EffectiveCulture.Name, out language) && language.IsSupportedLanguage())
                     return language;
             }
 

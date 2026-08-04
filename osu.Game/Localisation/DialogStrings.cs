@@ -32,7 +32,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Failed to automatically locate an osu!stable installation."
         /// </summary>
-        public static LocalisableString StableDirectoryLocationHeaderText => new TranslatableString(getKey(@"stable_directory_location_header_text"), @"Failed to automatically locate an osu!stable installation.");
+        public static LocalisableString StableDirectoryLocationHeaderText => new TranslatableString(getKey(@"stable_directory_location_header_text"), @"Failed to automatically locate a !lampstable installation.");
 
         /// <summary>
         /// "An existing install could not be located. If you know where it is, you can help locate it."
@@ -47,7 +47,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Actually I don't have osu!stable installed."
         /// </summary>
-        public static LocalisableString StableDirectoryLocationCancelButton => new TranslatableString(getKey(@"stable_directory_location_cancel_button"), @"Actually I don't have osu!stable installed.");
+        public static LocalisableString StableDirectoryLocationCancelButton => new TranslatableString(getKey(@"stable_directory_location_cancel_button"), @"Actually I don't have !lampstable installed.");
 
         /// <summary>
         /// "All local scores on {0}"
@@ -67,7 +67,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Are you sure you want to exit osu!?"
         /// </summary>
-        public static LocalisableString ConfirmExitHeaderText => new TranslatableString(getKey(@"confirm_exit_header_text"), @"Are you sure you want to exit osu!?");
+        public static LocalisableString ConfirmExitHeaderText => new TranslatableString(getKey(@"confirm_exit_header_text"), @"Are you sure you want to exit !lamp?");
 
         /// <summary>
         /// "Last chance to turn back"
