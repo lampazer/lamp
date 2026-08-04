@@ -157,7 +157,7 @@ namespace osu.Desktop
             // Apple operating systems use a better icon provided via external assets.
             if (!RuntimeInfo.IsApple)
             {
-                var iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetType(), "delta.ico");
+                var iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetType(), "lamp.ico");
                 if (iconStream != null)
                     host.Window.SetIconFromStream(iconStream);
             }

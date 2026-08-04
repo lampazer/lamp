@@ -8,7 +8,7 @@
     <AssemblyTitle>lamp</AssemblyTitle>
     <Title>lamp</Title>
     <Product>lamp</Product>
-    <ApplicationIcon>delta.ico</ApplicationIcon>
+    <ApplicationIcon>lamp.ico</ApplicationIcon>
     <Version>0.0.0</Version>
     <FileVersion>0.0.0</FileVersion>
   </PropertyGroup>
@@ -29,10 +29,10 @@
     <PackageReference Include="Velopack" Version="0.0.1298" />
   </ItemGroup>
   <ItemGroup Label="Resources">
-    <EmbeddedResource Include="delta.ico" />
+    <EmbeddedResource Include="lamp.ico" />
   </ItemGroup>
   <ItemGroup Label="Windows Icons">
-    <Content Include="delta.ico" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="lamp.ico" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="beatmap.ico" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
