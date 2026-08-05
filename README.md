@@ -2,9 +2,9 @@
 	<img src="/title.png" />
 	<h3 align="center">
 
-# delta (deltalazer)
+# lamp/azer
 
-solo fork of **deltalazer/delta**.
+solo fork of **deltalazer/delta**, with very work in progress features!
 
 # which means you can do a lot of things!!!
 
