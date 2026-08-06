@@ -154,7 +154,7 @@ namespace osu.Game.Overlays.Changelog
             };
 
             supportLinkText.AddText("Support further development of !lamp and ");
-            supportLinkText.AddLink("become a !lampsupporter", @"https://osu.ppy.sh/home/support", t => t.Font = t.Font.With(weight: FontWeight.Bold));
+            supportLinkText.AddLink("become a !lamplol", @"https://osu.ppy.sh/home/support", t => t.Font = t.Font.With(weight: FontWeight.Bold));
             supportLinkText.AddText(" today!");
         }
 

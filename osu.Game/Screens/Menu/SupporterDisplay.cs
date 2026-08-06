@@ -84,13 +84,13 @@ namespace osu.Game.Screens.Menu
                 {
                     supportFlow.AddText("Eternal thanks to you for supporting !lamp!", formatSemiBold);
 
-                    backgroundBox.FadeColour(colours.Pink, 250);
+                    backgroundBox.FadeColour(colours.BlueDark, 250);
                 }
                 else
                 {
                     supportFlow.AddText("Consider becoming a ", formatSemiBold);
-                    supportFlow.AddLink("!lampsupporter", "https://osu.ppy.sh/home/support", formatSemiBold);
-                    supportFlow.AddText(" to help support !lamp's development", formatSemiBold);
+                    supportFlow.AddLink("!lamplol", "https://osu.ppy.sh/home/support", formatSemiBold);
+                    supportFlow.AddText(" to help support !lamp's super cool development", formatSemiBold);
 
                     backgroundBox.FadeColour(colours.Pink4, 250);
                 }

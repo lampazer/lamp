@@ -12,7 +12,7 @@ namespace osu.Game.Localisation
         /// <summary>
         /// "Playlist durations longer than 2 weeks require an active osu!supporter tag."
         /// </summary>
-        public static LocalisableString SupporterOnlyDurationNotice => new TranslatableString(getKey(@"supporter_only_duration_notice"), @"Playlist durations longer than 2 weeks require an active !lampsupporter tag.");
+        public static LocalisableString SupporterOnlyDurationNotice => new TranslatableString(getKey(@"supporter_only_duration_notice"), @"Playlist durations longer than 2 weeks require an active !lamplol tag.");
 
         /// <summary>
         /// "Can&#39;t invite this user as you have blocked them or they have blocked you."

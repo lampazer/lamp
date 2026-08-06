@@ -90,10 +90,11 @@ namespace osu.Game.Localisation
                 return null;
 
             return text
-                .Replace("osu!stable", "!lampstable")
-                .Replace("osu!supporter", "!lampsupporter")
-                .Replace("osu!direct", "!lampdirect")
-                .Replace("osu!", "!lamp");
+                .Replace("osu!stable", "!lamp")
+                .Replace("osu!supporter", "!lamplol")
+                .Replace("!lampsupporter", "!lamplol")
+                .Replace("osu!direct", "!lampidontknowlol")
+                .Replace("osu!", "!lampazer");
         }
 
         public Task<string> GetAsync(string lookup, CancellationToken cancellationToken = default)

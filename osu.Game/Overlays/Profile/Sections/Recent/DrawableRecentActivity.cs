@@ -196,12 +196,12 @@ namespace osu.Game.Overlays.Profile.Sections.Recent
 
                 case RecentActivityType.UserSupportFirst:
                     addUserLink();
-                    addText(" has become a !lampsupporter - thanks for your generosity!");
+                    addText(" has become a !lamplol - thanks for your generosity!");
                     break;
 
                 case RecentActivityType.UserSupportGift:
                     addUserLink();
-                    addText(" has received the gift of !lampsupporter!");
+                    addText(" has received the gift of !lamplol!");
                     break;
 
                 case RecentActivityType.UsernameChange:
