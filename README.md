@@ -9,7 +9,7 @@ solo fork of **deltalazer/delta**, with very **(awesome)** work in progress feat
 
 # **(awesome)** features!
 
-- * **NOTE: the game (**lamp**) is constantly evolving and it's open to suggesting. expect A LOT of bugs EVERYWHERE cuz **my coding knowledge is not much**.
+- * **NOTE: the game (**lamp**) is constantly evolving and it's open to suggesting. expect A LOT of bugs EVERYWHERE cuz **my coding knowledge is not the best lol**.
  
   * awesome camera moving :D
   * awesome logo :0
