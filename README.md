@@ -5,9 +5,11 @@
 
 # lamp/azer
 
-solo fork of **deltalazer/delta**, with very work in progress features!
+solo fork of **deltalazer/delta**, with very **(awesome)** work in progress features!
 
-# which means you can do a lot of things!!!
+# which means you can play with the source code and do a lot of things!
+
+what should i put here?
 
 ## project base
 
