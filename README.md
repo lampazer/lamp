@@ -7,9 +7,25 @@
 
 solo fork of **deltalazer/delta**, with very **(awesome)** work in progress features!
 
+# **(awesome)** features!
+
+- * **NOTE: the game (**lamp**) is constantly evolving and it's open to suggesting. expect A LOT of bugs EVERYWHERE cuz **my coding knowledge is not much**.
+ 
+  * awesome camera moving :D
+  * awesome logo :0
+  * awesome things
+  * awesome features
+  * more awesome things trust
+  * idk
+  * probably awesome things
+  * keyboard features
+  * i dont know
+  * probably
+  * and much more i guess :)
+
 # which means you can play with the source code and do a lot of things!
 
-what should i put here?
+what should i put here? i dont know probably something lol
 
 ## project base
 
