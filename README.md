@@ -76,3 +76,6 @@ community contributions are welcome!!
 same license as upstream osu!lazer
 
 see `LICENCE`
+
+# this is a fork of deltalazer
+hallo
