@@ -21,9 +21,7 @@ solo fork of **deltalazer/delta**, with very work in progress features!
 
 i **DO NOT** recommend building for release as this currently doesn't have systems in place that make it safe to use in the official osu! server
 
-## quick build (desktop)
-
-from repository root:
+## run the game
 
 ```bash
 dotnet build osu.Desktop/osu.Desktop.csproj -c Debug
