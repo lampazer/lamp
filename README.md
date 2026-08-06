@@ -12,6 +12,7 @@ solo fork of **deltalazer/delta**, with very work in progress features!
 ## project base
 
 - upstream project: https://github.com/deltalazer/delta
+- up up upstream project: https://github.com/ppy/osu
 
 ## important server note
 
