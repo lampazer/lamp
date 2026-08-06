@@ -15,13 +15,15 @@ what should i put here?
 
 - upstream project: https://github.com/deltalazer/delta
 - up up upstream project: https://github.com/ppy/osu
+so uh this is a fork of deltalazer so this is a fork fork of osu!(lazer) basically yeah i hope you understand :D
 
-## important server note
+## ---> important server note
 
-- **debug builds** connect to osu!dev server
-- **release builds** connect to official osu! server
+- **debug builds :D** connect to osu!dev server
+- **release builds :c** connect to official osu! server
 
-i **DO NOT** recommend building for release as this currently doesn't have systems in place that make it safe to use in the official osu! server
+i **DON'T** recommend building for release as this currently doesn't have systems in place that make it safe to use in the official osu! server
+(working on a custom server dw)
 
 ## run the game
 
@@ -45,7 +47,7 @@ please include:
 - crash logs/stack trace if available
 - whether you used debug or release build
 
-## contributing
+## contributing :D
 
 community contributions are welcome!!
 
