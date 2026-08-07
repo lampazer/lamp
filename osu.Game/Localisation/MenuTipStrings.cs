@@ -40,9 +40,9 @@ namespace osu.Game.Localisation
         public static LocalisableString ScreenScalingSettings => new TranslatableString(getKey(@"screen_scaling_settings"), @"Try adjusting the ""Screen Scaling"" mode to change your gameplay or UI area, even in fullscreen!");
 
         /// <summary>
-        /// "What used to be &quot;osu!direct&quot; is available to all users just like on the website. You can access it anywhere using {0}!"
+        /// "Wsing!"
         /// </summary>
-        public static LocalisableString FreeOsuDirect(LocalisableString keybind) => new TranslatableString(getKey(@"free_osu_direct"), @"What used to be ""!lampdirect"" is available to all users just like on the website. You can access it anywhere using {0}!", keybind);
+        public static LocalisableString FreeOsuDirect(LocalisableString keybind) => new TranslatableString(getKey(@"free_osu_direct"), @"Wsing!", keybind);
 
         /// <summary>
         /// "Seeking in replays is available by dragging on the progress bar at the bottom of the screen or by using the left and right arrow keys!"
@@ -55,9 +55,9 @@ namespace osu.Game.Localisation
         public static LocalisableString TryNewMods => new TranslatableString(getKey(@"try_new_mods"), @"Try scrolling right in mod select to find a bunch of new fun mods!");
 
         /// <summary>
-        /// "Most of the web content (profiles, rankings, etc.) are available natively in-game from the icons on the toolbar!"
+        /// "Press Alt + F4!"
         /// </summary>
-        public static LocalisableString EmbeddedWebContent => new TranslatableString(getKey(@"embedded_web_content"), @"Most of the web content (profiles, rankings, etc.) are available natively in-game from the icons on the toolbar!");
+        public static LocalisableString EmbeddedWebContent => new TranslatableString(getKey(@"embedded_web_content"), @"Press Alt + F4!");
 
         /// <summary>
         /// "Get more details, hide or delete a beatmap by right-clicking on its panel at song select!"
@@ -80,9 +80,9 @@ namespace osu.Game.Localisation
         public static LocalisableString ReplayPausing(LocalisableString keybind) => new TranslatableString(getKey(@"replay_pausing"), @"You can pause during a replay by pressing {0}!", keybind);
 
         /// <summary>
-        /// "Most of the hotkeys in the game are configurable and can be changed to anything you want. Check the bindings panel under input settings!"
+        /// "You can fork the game's repository to contribute changes, all contributions are very welcome!"
         /// </summary>
-        public static LocalisableString ConfigurableHotkeys => new TranslatableString(getKey(@"configurable_hotkeys"), @"Most of the hotkeys in the game are configurable and can be changed to anything you want. Check the bindings panel under input settings!");
+        public static LocalisableString ConfigurableHotkeys => new TranslatableString(getKey(@"configurable_hotkeys"), @"You can fork the game's repository to contribute changes, all contributions are very welcome!");
 
         /// <summary>
         /// "Your gameplay HUD can be customised by using the skin layout editor. Open it at any time via {0}!"

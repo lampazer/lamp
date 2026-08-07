@@ -140,7 +140,14 @@ namespace osu.Game.Screens.Menu
                             {
                                 exitConfirmedViaHoldOrClick = e is MouseEvent;
                                 this.Exit();
+                            },
+                            // ------------------ EVENTO DE TU NUEVO BOTÓN DE RESTART ------------------
+                            OnRestart = e => 
+                            {
+                                exitConfirmedViaHoldOrClick = e is MouseEvent; // Para que no pida confirmación visual extra
+                                host.Exit(); // Por ahora cerrará el juego directo, luego implementaremos un soft-restart si lo prefieres
                             }
+                            // --------------------------------------------------------------------------
                         }
                     }
                 },

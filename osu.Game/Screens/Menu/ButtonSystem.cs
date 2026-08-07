@@ -43,6 +43,7 @@ namespace osu.Game.Screens.Menu
         public Action? OnEditBeatmap;
         public Action? OnEditSkin;
         public Action<UIEvent>? OnExit;
+        public Action<UIEvent>? OnRestart; // <-- ¡El evento de tu nuevo botón!
         public Action? OnBeatmapListing;
         public Action? OnSolo;
         public Action? OnSettings;
@@ -186,8 +187,14 @@ namespace osu.Game.Screens.Menu
             buttonsTopLevel.Add(new MainMenuButton(ButtonSystemStrings.Browse, @"button-default-select", OsuIcon.Beatmap, new Color4(165, 204, 0, 255), (_, _) => OnBeatmapListing?.Invoke(), Key.B,
                 Key.D));
 
+            // ¡Aquí es donde inyectamos los últimos botones!
             if (host.CanExit)
+            {
                 buttonsTopLevel.Add(new MainMenuButton(ButtonSystemStrings.Exit, string.Empty, OsuIcon.CrossCircle, new Color4(238, 51, 153, 255), (_, e) => OnExit?.Invoke(e), Key.Q));
+                // ------------------ TU NUEVO BOTÓN ------------------
+                buttonsTopLevel.Add(new MainMenuButton("restart", string.Empty, FontAwesome.Solid.Sync, new Color4(255, 204, 0, 255), (_, e) => OnRestart?.Invoke(e), Key.R));
+                // ----------------------------------------------------
+            }
 
             buttonArea.AddRange(buttonsMulti);
             buttonArea.AddRange(buttonsPlay);
