@@ -32,7 +32,7 @@ namespace osu.Game.Overlays
                     Origin = Anchor.BottomCentre,
                     Font = OsuFont.Numeric.With(weight: FontWeight.Bold, size: 12),
                     Colour = colours.GreenLight,
-                    Text = @"Under Heavy Development. lamp/azer build 2026-0.3.0",
+                    Text = @"Under Heavy Development. lamp/azer build 2026-0.5.0",
                 },
                 new Sprite
                 {
