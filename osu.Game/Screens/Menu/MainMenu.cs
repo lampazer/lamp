@@ -145,8 +145,22 @@ namespace osu.Game.Screens.Menu
                             OnRestart = e => 
                             {
                                 exitConfirmedViaHoldOrClick = true; // Para que no pida confirmación visual extra
-                                Game.RestartAppWhenExited(); // Prepara el cliente para reiniciar
-                                this.Exit(); // Cierra el menú y ejecuta el comando superior
+
+                                // ¡FUERZA BRUTA! Obtenemos la ruta exacta de tu .exe actual
+                                string exePath = System.Environment.ProcessPath;
+                                
+                                if (!string.IsNullOrEmpty(exePath))
+                                {
+                                    // Obligamos a Windows a abrir una instancia nueva del juego
+                                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                                    {
+                                        FileName = exePath,
+                                        UseShellExecute = true
+                                    });
+                                }
+
+                                // Matamos la ventana actual al instante
+                                host.Exit(); 
                             }
                             // --------------------------------------------------------------------------
                         }
