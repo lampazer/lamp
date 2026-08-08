@@ -3,6 +3,7 @@
 </p>
 
 # osu!(v2)
+once again, i DONT use this branch. entirely focused on master branch.
 
 community-driven fork of **osu!lazer** with advanced section and hitobject gimmick systems for mapping and gameplay experiments
 
