@@ -5,6 +5,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -13,6 +14,7 @@ using osu.Framework.Audio;
 using osu.Framework.Audio.Sample;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
@@ -21,20 +23,28 @@ using osu.Framework.Screens;
 using osu.Framework.Utils;
 using osuTK;
 using osuTK.Graphics;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace osu.Game.Screens.Menu
 {
     public partial class IntroCircles : IntroScreen
     {
         protected override string BeatmapHash => "3c8b1fcc9434dbb29e2fb613d3b9eada9d7bb6c125ceb32396c3b53437280c83";
-        protected override string BeatmapFile => "bee.osz";
+        protected override string BeatmapFile => "bee.osz"; 
 
         public const double TRACK_START_DELAY = 600;
-        private const double delay_for_menu = 7000; // 7 Segundos exactos de intro caótica
+        private const double delay_for_menu = 7000;
+
+        // --- LA MEMORIA CACHÉ DE LA CÁMARA PRE-LANZAMIENTO ---
+        public static byte[] ScreenPixels;
+        public static int ScreenWidth;
+        public static int ScreenHeight;
 
         private Sample welcome;
         private Container<BouncingLogo> logoContainer;
         private Texture lampTexture;
+        private Sprite desktopBackground;
 
         public IntroCircles([CanBeNull] Func<MainMenu> createNextScreen = null)
             : base(createNextScreen)
@@ -42,23 +52,58 @@ namespace osu.Game.Screens.Menu
         }
 
         [BackgroundDependencyLoader]
-        private void load(AudioManager audio, TextureStore textures)
+        private void load(AudioManager audio, TextureStore textures, IRenderer renderer)
         {
             if (MenuVoice.Value)
                 welcome = audio.Samples.Get(@"Intro/welcome");
 
             lampTexture = tryGetCustomLogoTexture(textures);
 
-            // Fondo negro absoluto y contenedor de logos
+            // Rescatamos la foto que se tomó ANTES de abrir el juego
+            Texture screenshot = null;
+            if (ScreenPixels != null && ScreenWidth > 0 && ScreenHeight > 0)
+            {
+                try
+                {
+                    var image = SixLabors.ImageSharp.Image.LoadPixelData<Rgba32>(ScreenPixels, ScreenWidth, ScreenHeight);
+                    screenshot = renderer.CreateTexture(ScreenWidth, ScreenHeight);
+                    screenshot.SetData(new TextureUpload(image));
+                    ScreenPixels = null; // ¡Limpiamos la RAM cruda porque ya está en la Tarjeta de Video!
+                }
+                catch { }
+            }
+
+            Drawable backgroundLayer;
+            if (screenshot != null)
+            {
+                backgroundLayer = desktopBackground = new Sprite
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    Texture = screenshot,
+                    FillMode = FillMode.Stretch,
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre
+                };
+            }
+            else
+            {
+                backgroundLayer = new Box
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    Colour = Color4.Black
+                };
+            }
+
             InternalChild = new Container
             {
                 RelativeSizeAxes = Axes.Both,
                 Children = new Drawable[]
                 {
+                    backgroundLayer,
                     new Box
                     {
                         RelativeSizeAxes = Axes.Both,
-                        Colour = Color4.Black 
+                        Colour = new Color4(0f, 0f, 0f, 0.5f) 
                     },
                     logoContainer = new Container<BouncingLogo>
                     {
@@ -72,7 +117,6 @@ namespace osu.Game.Screens.Menu
         {
             base.LogoArriving(logo, resuming);
             
-            // Escondemos el logo principal original para que no estorbe la intro
             logo.Alpha = 0; 
             logo.AlwaysPresent = true;
 
@@ -84,21 +128,30 @@ namespace osu.Game.Screens.Menu
                 {
                     StartTrack();
                     PrepareMenuLoad();
-                    Scheduler.AddDelayed(LoadMenu, delay_for_menu - TRACK_START_DELAY);
+
+                    Scheduler.AddDelayed(() =>
+                    {
+                        desktopBackground?.FadeOut(300);
+                    }, delay_for_menu - TRACK_START_DELAY - 300);
+
+                    Scheduler.AddDelayed(() =>
+                    {
+                        desktopBackground?.Texture?.Dispose(); 
+                        desktopBackground?.Expire();           
+                        LoadMenu();
+                    }, delay_for_menu - TRACK_START_DELAY);
+
                 }, TRACK_START_DELAY);
 
-                // --- INICIA EL CAOS ---
                 var primerLogo = new BouncingLogo(lampTexture)
                 {
-                    Position = new Vector2(0.5f, 0.5f),
-                    RelativePositionAxes = Axes.Both,
-                    Velocity = new Vector2(RNG.NextSingle(-0.8f, 0.8f), RNG.NextSingle(-0.8f, 0.8f))
+                    Velocity = Vector2.Zero 
                 };
                 logoContainer.Add(primerLogo);
 
-                // A los 2.5 segundos (2500ms) empieza a clonarse
                 Scheduler.AddDelayed(() =>
                 {
+                    primerLogo.Velocity = new Vector2(RNG.NextSingle(-700f, 700f), RNG.NextSingle(-700f, 700f));
                     Scheduler.AddDelayed(duplicarLogos, 400, true);
                 }, 2500);
                 
@@ -108,7 +161,7 @@ namespace osu.Game.Screens.Menu
 
         private void duplicarLogos()
         {
-            if (logoContainer.Count > 300) return; // Límite para no crashear la PC
+            if (logoContainer.Count > 150) return;
 
             int cantidadActual = logoContainer.Count;
             for (int i = 0; i < cantidadActual; i++)
@@ -117,22 +170,23 @@ namespace osu.Game.Screens.Menu
                 var logoClon = new BouncingLogo(lampTexture)
                 {
                     Position = logoExistente.Position,
-                    Velocity = new Vector2(RNG.NextSingle(-1.2f, 1.2f), RNG.NextSingle(-1.2f, 1.2f))
+                    Velocity = new Vector2(RNG.NextSingle(-700f, 700f), RNG.NextSingle(-700f, 700f))
                 };
                 logoContainer.Add(logoClon);
             }
         }
 
-        // --- FÍSICAS DE REBOTE ---
         private partial class BouncingLogo : Sprite
         {
             public Vector2 Velocity;
+            private bool inicializado;
 
             public BouncingLogo(Texture texture)
             {
                 Texture = texture;
                 Origin = Anchor.Centre;
-                Size = new Vector2(150); // Tamaño miniatura
+                Anchor = Anchor.TopLeft; 
+                Size = new Vector2(150); 
                 FillMode = FillMode.Fit;
             }
 
@@ -141,7 +195,15 @@ namespace osu.Game.Screens.Menu
                 base.Update();
                 if (Parent == null || Parent.DrawSize == Vector2.Zero) return;
 
-                Position += Velocity * (float)Time.Elapsed;
+                if (!inicializado)
+                {
+                    Position = Parent.DrawSize / 2;
+                    inicializado = true;
+                }
+
+                if (Velocity == Vector2.Zero) return;
+
+                Position += Velocity * (float)(Time.Elapsed / 1000.0);
 
                 float mitadAncho = DrawWidth / 2;
                 float mitadAlto = DrawHeight / 2;
@@ -168,6 +230,83 @@ namespace osu.Game.Screens.Menu
                     Velocity.Y = -Math.Abs(Velocity.Y);
                 }
             }
+        }
+
+        // ---------------------------------------------------------------------
+        // --- EL GATILLO GLOBAL DE LA CÁMARA (P/Invoke) ---
+        // ---------------------------------------------------------------------
+        [DllImport("user32.dll")] private static extern IntPtr GetDC(IntPtr hWnd);
+        [DllImport("user32.dll")] private static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+        [DllImport("gdi32.dll")] private static extern IntPtr CreateCompatibleDC(IntPtr hDC);
+        [DllImport("gdi32.dll")] private static extern IntPtr CreateCompatibleBitmap(IntPtr hDC, int nWidth, int nHeight);
+        [DllImport("gdi32.dll")] private static extern IntPtr SelectObject(IntPtr hDC, IntPtr hObject);
+        [DllImport("gdi32.dll")] private static extern bool BitBlt(IntPtr hObject, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hObjectSource, int nXSrc, int nYSrc, int dwRop);
+        [DllImport("gdi32.dll")] private static extern bool DeleteDC(IntPtr hDC);
+        [DllImport("gdi32.dll")] private static extern bool DeleteObject(IntPtr hObject);
+        [DllImport("gdi32.dll")] private static extern int GetDIBits(IntPtr hdc, IntPtr hbmp, uint uStartScan, uint cScanLines, [Out] byte[] lpvBits, ref BITMAPINFO lpbi, uint uUsage);
+        [DllImport("user32.dll")] private static extern int GetSystemMetrics(int nIndex);
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct BITMAPINFOHEADER
+        {
+            public uint biSize; public int biWidth; public int biHeight; public ushort biPlanes; public ushort biBitCount;
+            public uint biCompression; public uint biSizeImage; public int biXPelsPerMeter; public int biYPelsPerMeter;
+            public uint biClrUsed; public uint biClrImportant;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct BITMAPINFO
+        {
+            public BITMAPINFOHEADER bmiHeader;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)] public uint[] bmiColors;
+        }
+
+        // ¡Esta función es pública y estática para llamarla desde afuera!
+        public static void TakePrelaunchScreenshot()
+        {
+            if (!OperatingSystem.IsWindows()) return;
+
+            try
+            {
+                ScreenWidth = GetSystemMetrics(0); 
+                ScreenHeight = GetSystemMetrics(1); 
+
+                IntPtr hdcSrc = GetDC(IntPtr.Zero); 
+                IntPtr hdcDest = CreateCompatibleDC(hdcSrc);
+                IntPtr hBitmap = CreateCompatibleBitmap(hdcSrc, ScreenWidth, ScreenHeight);
+                IntPtr hOld = SelectObject(hdcDest, hBitmap);
+
+                BitBlt(hdcDest, 0, 0, ScreenWidth, ScreenHeight, hdcSrc, 0, 0, 0x00CC0020 | 0x40000000); 
+
+                SelectObject(hdcDest, hOld);
+
+                BITMAPINFO info = new BITMAPINFO();
+                info.bmiHeader = new BITMAPINFOHEADER();
+                info.bmiHeader.biSize = (uint)Marshal.SizeOf(info.bmiHeader);
+                info.bmiHeader.biWidth = ScreenWidth;
+                info.bmiHeader.biHeight = -ScreenHeight; 
+                info.bmiHeader.biPlanes = 1;
+                info.bmiHeader.biBitCount = 32;
+                info.bmiHeader.biCompression = 0;
+
+                byte[] pixels = new byte[ScreenWidth * ScreenHeight * 4];
+                GetDIBits(hdcDest, hBitmap, 0, (uint)ScreenHeight, pixels, ref info, 0);
+
+                DeleteDC(hdcDest);
+                ReleaseDC(IntPtr.Zero, hdcSrc);
+                DeleteObject(hBitmap);
+
+                for (int i = 0; i < pixels.Length; i += 4)
+                {
+                    byte b = pixels[i];
+                    pixels[i] = pixels[i + 2]; 
+                    pixels[i + 2] = b;
+                    pixels[i + 3] = 255; 
+                }
+
+                ScreenPixels = pixels; // Guardamos la foto en la RAM hasta que el motor despierte
+            }
+            catch { }
         }
 
         // --- HACK DE CARGA DE ASSETS ---
