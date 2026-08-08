@@ -3,6 +3,7 @@
 </p>
 
 # DeltaLazer
+(i dont use this branch)
 
 DeltaLazer (formerly called osu!v2 [Cliche name, we know]) is a community-driven fork of **osu!lazer**, made to be a playground for custom implementations with the lazer client!
 
