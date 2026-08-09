@@ -5,6 +5,10 @@
 
 # lamp/azer
 
+- * **NOTE: the game (**lamp**) is constantly evolving and it's open to suggesting. expect A LOT of bugs EVERYWHERE cuz **my coding knowledge is not the best lol**.
+so basically the game is in a very very very super hyper ultra very early alpha state
+
+
 solo fork of **deltalazer/delta**, with very **(awesome)** work in progress features!
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -14,8 +18,6 @@ solo fork of **deltalazer/delta**, with very **(awesome)** work in progress feat
 --------------------------------------------------------------------------------------------------------------------------------
 
 # **(awesome)** features!
-
-- * **NOTE: the game (**lamp**) is constantly evolving and it's open to suggesting. expect A LOT of bugs EVERYWHERE cuz **my coding knowledge is not the best lol**.
  
   * awesome camera moving :D
   * awesome logo :0
