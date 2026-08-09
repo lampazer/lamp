@@ -60,9 +60,9 @@ namespace osu.Game.Localisation
         public static LocalisableString EmbeddedWebContent => new TranslatableString(getKey(@"embedded_web_content"), @"Press Alt + F4!");
 
         /// <summary>
-        /// "Get more details, hide or delete a beatmap by right-clicking on its panel at song select!"
+        /// "Get more details, hide or delete a chart by right-clicking on its panel at song select!"
         /// </summary>
-        public static LocalisableString BeatmapRightClick => new TranslatableString(getKey(@"beatmap_right_click"), @"Get more details, hide or delete a beatmap by right-clicking on its panel at song select!");
+        public static LocalisableString BeatmapRightClick => new TranslatableString(getKey(@"beatmap_right_click"), @"Get more details, hide or delete a chart by right-clicking on its panel at song select!");
 
         /// <summary>
         /// "Check out the &quot;playlists&quot; system, which lets users create their own custom and permanent leaderboards!"
