@@ -30,7 +30,7 @@ what should i put here? i dont know probably something lol
 ## project base
 
 - upstream project: https://github.com/deltalazer/delta
-- up up upstream project: https://github.com/ppy/osu
+- up upstream project: https://github.com/ppy/osu
 so uh this is a fork of deltalazer so this is a fork fork of osu!(lazer) basically yeah i hope you understand :D
 
 ## ---> important server note
@@ -41,17 +41,18 @@ so uh this is a fork of deltalazer so this is a fork fork of osu!(lazer) basical
 i **DON'T** recommend building for release as this currently doesn't have systems in place that make it safe to use in the official osu! server
 (working on a custom server dw)
 
-## run the game
+## running and compiling
+
+* run the game:
 
 ```bash
 dotnet build osu.Desktop/osu.Desktop.csproj -c Debug
 ```
 
-publish debug builds:
+* compile for windows (prefer using debug):
 
 ```bash
-dotnet publish osu.Desktop/osu.Desktop.csproj -c Debug -r win-x64 --self-contained false -o ../builds/windows-debug-v2
-dotnet publish osu.Desktop/osu.Desktop.csproj -c Debug -r linux-x64 --self-contained false -o ../builds/linux-debug-v2
+dotnet publish osu.Desktop/osu.Desktop.csproj -c Debug -r win-x64 --self-contained false
 ```
 
 ## reporting bugs
@@ -63,7 +64,7 @@ please include:
 - crash logs/stack trace if available
 - whether you used debug or release build
 
-## contributing :D
+## contributing :D <---
 
 community contributions are welcome!!
 
@@ -73,7 +74,7 @@ community contributions are welcome!!
 
 ## license
 
-same license as upstream osu!lazer
+it's the same license as upstream osu!lazer
 
 see `LICENCE`
 
