@@ -7,7 +7,9 @@
 
 solo fork of **deltalazer/delta**, with very **(awesome)** work in progress features!
 
-##################### ---- FEATURES ---- #####################
+--------------------------------------------------------------------------------------------------------------------------------
+
+## ##################### ---- FEATURES ---- #####################
 
 # **(awesome)** features!
 
@@ -29,7 +31,9 @@ solo fork of **deltalazer/delta**, with very **(awesome)** work in progress feat
 
 what should i put here? i dont know probably something lol
 
-##################### ---- things you probably need to know ---- #####################
+--------------------------------------------------------------------------------------------------------------------------------
+
+## ##################### ---- things you probably need to know ---- #####################
 
 ## project base
 
@@ -58,6 +62,10 @@ dotnet build osu.Desktop/osu.Desktop.csproj -c Debug
 ```bash
 dotnet publish osu.Desktop/osu.Desktop.csproj -c Debug -r win-x64 --self-contained false
 ```
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+## ##################### ---- Contributing :D ---- #####################
 
 ## reporting bugs
 
